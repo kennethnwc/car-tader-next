@@ -10,7 +10,7 @@ export default function Faq({ faq }: Props) {
   return (
     <div>
       {faq.map((f) => (
-        <div>
+        <div key={f.id}>
           {f.question} | {f.answer}
         </div>
       ))}
