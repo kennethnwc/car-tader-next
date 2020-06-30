@@ -51,7 +51,7 @@ export default function Search({ makes, models, singleColumn }: SearchProps) {
     <Formik
       initialValues={initialValues}
       onSubmit={(values) => {
-        Router.push({ pathname: "/", query: { ...values, page: 1 } });
+        Router.push({ pathname: "/cars", query: { ...values, page: 1 } });
       }}
     >
       {({ values }) => (
@@ -152,6 +152,7 @@ export function ModelSelect({ models, make, ...props }: ModelSelectProps) {
   });
 
   const { data } = useSWR<Model[]>("/api/models?make=" + make, {
+    dedupingInterval: 60000,
     onSuccess: (newValues) => {
       if (!newValues.map((a) => a.model).includes(field.value)) {
         //set value to "all"
